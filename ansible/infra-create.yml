@@ -5,6 +5,6 @@
 ################################################################################
 ---
 
-- include: vms-create.yml
+- include: vm-create.yml
 - include: databases.yml
 - include: webservers.yml
