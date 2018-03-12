@@ -4,13 +4,13 @@
 ### DNS Configuration
 ################################################################################
 
-- name: Make sure dhcpd.conf includes vm-ansible.conf
+- name: Make sure dhcpd.conf includes vms-ansible.conf
   lineinfile:
     state: present
     create: yes
     path: /etc/dhcp/dhcpd.conf
-    insertafter: 'include "/etc/dhcp/vm-ubuntu.conf";'
-    line: '      include "/etc/dhcp/vm-ansible.conf";'
+    insertafter: 'include "/etc/dhcp/vms-ubuntu.conf";'
+    line: '      include "/etc/dhcp/vms-ansible.conf";'
     owner: root
     group: root
     mode: '0644'
@@ -20,7 +20,7 @@
   lineinfile:
     state: "{{ (libvirt_vm_state == 'create') | ternary('present', 'absent') }}"
     create: yes
-    path: /etc/dhcp/vm-ansible.conf
+    path: /etc/dhcp/vms-ansible.conf
     regexp: "^host {{ item.key }}"
     line: "host {{ item.key }} { hardware ethernet {{ item.value.mac }}; fixed-address {{ item.value.ip }}; }"
     owner: root

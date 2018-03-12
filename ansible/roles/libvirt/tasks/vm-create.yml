@@ -1,5 +1,5 @@
 ---
-# tasks file for libvirt/vm-create.yml
+# tasks file for libvirt/vms-create.yml
 
 ################################################################################
 ### VM Creation
@@ -56,7 +56,7 @@
   lineinfile:
     state: present
     create: yes
-    path: /etc/dhcp/vm-ansible.conf
+    path: /etc/dhcp/vms-ansible.conf
     insertafter: EOF
     line: "host {{ item.1.name }} { hardware ethernet {{ libvirt_mac_prefix ~ ('%02x' % (item.0 + libvirt_mac_offset)) }}; fixed-address {{ libvirt_ip_prefix ~ (item.0 + libvirt_ip_offset) }}; }"
     owner: root

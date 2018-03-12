@@ -18,7 +18,7 @@
   virt:
     name: "{{ item.key }}"
     command: define
-    xml: "{{ lookup('template', 'libvirt-vm-template.xml.j2') }}"
+    xml: "{{ lookup('template', 'libvirt-vms-template.xml.j2') }}"
   with_dict: "{{ __libvirt_vms }}"
 
 - name: Start VMs
