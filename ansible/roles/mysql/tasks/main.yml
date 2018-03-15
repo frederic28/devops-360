@@ -3,15 +3,27 @@
 
 - name: Install mysql packages
   apt:
-    name: mysql
-    state: present
-    with_items:
-      - mysql
-      - mysql-client
-      - mysql-server
+  name: mysql
+  state: present
+  with_items:
+    - mysql
+    - mysql-client
+    - mysql-server
 
 - name: start mysql
   service:
     name: mysql
     state: started
     enabled: true
+
+- name: Install Mysql for prod
+  host: 
+
+- name: Create mysql user
+  mysql_user:
+    login_user: {{ user-admin }}
+    login_password: {{ password-admin }}
+    name: mysql-user
+
+    host: localhost
+    state: present
