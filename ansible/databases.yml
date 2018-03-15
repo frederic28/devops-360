@@ -7,7 +7,7 @@
 
 # TODO
 - name: Configure databases
-  hosts: all
+  hosts: databases
   become: yes
 
   roles:

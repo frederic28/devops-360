@@ -21,12 +21,6 @@
     name: python-mysqldb
     state: latest
 
-- name: Launch MySQL service
-  service:
-    name: mysql
-    state: started
-    enabled: yes
-
 - name: Tune MySQL configuration
   template:
     src: ./resources/my.cnf
