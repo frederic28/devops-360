@@ -6,7 +6,6 @@
     state: stopped
     name: apache2
 
-
 - name: Install common apt-packages
   apt:
   name: common
@@ -15,7 +14,7 @@
     - htop
     - nload
     - telnet
-    - netstat
+    - net-tools
     - ntp
     - git
 

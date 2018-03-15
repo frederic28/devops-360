@@ -1,2 +1,5 @@
 ---
 # vars file for mysql
+user-admin: root
+password-admin: root
+
