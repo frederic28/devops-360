@@ -23,8 +23,8 @@
 
 - name: Tune MySQL configuration
   template:
-    src: /templates/my.cnf
-    dest: /etc/my.cnf
+    src: /etc/my.cnf
+    dest: /root/my.cnf
     mode: 0644
   notify:
     - restart mysqld
