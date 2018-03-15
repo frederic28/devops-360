@@ -1,6 +1,8 @@
 ---
 # tasks file for mysql
 
+# cryptage ansible-vault
+
 - name: Install mysql packages
   apt:
   name: mysql
@@ -14,15 +16,9 @@
     - python-pip
     - python-dev
 
-- name: Install the MySQL-python through pip
-  sudo: yes
-  with_items:
-    - pip
-    - MySQL-python
-
 - name: Mot de passe root
   mysql_user:
-    name: root
-    password: root
-    priv: '*.*:ALL'
+    login_user: root
+    login_password: root
+    name: sql-user
     state: present
