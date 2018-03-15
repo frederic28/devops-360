@@ -21,14 +21,9 @@
     name: python-mysqldb
     state: latest
 
-- name: restart mysql
-  service:
-    state: restarted
-    name: mysql-server
-
-- name: Create the Drupal database
+- name: Create a new database with name 'bobdata'
   mysql_db:
-    db: "{{ db_name }}"
+    name: bobdata
     state: present
 
 - name: Create the user
