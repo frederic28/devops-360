@@ -11,11 +11,11 @@
   pkg: {{common}}
   state: installed
     with_items:
-         - htop
-         - nload
-         - telnet
-         - netstat
-         - ntp
+      - htop
+      - nload
+      - telnet
+      - netstat
+      - ntp
 
 
 - name: Set timezone
