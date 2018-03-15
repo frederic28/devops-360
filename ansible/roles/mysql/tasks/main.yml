@@ -9,5 +9,9 @@
     - mysql
     - mysql-client
     - mysql-server
-  vars:
-    MySQL_root_pass: "{{ password-admin }}"
+
+- name: Mot de passe root
+  mysql_user:
+    name: "{{ user-admin }}"
+    password: "{{ password-admin }}"
+    state: present

@@ -1,2 +1,43 @@
 ---
 # tasks file for nginx
+
+- name: Stop service apache
+  service:
+    state: stopped
+    name: apache2
+
+- name: Install nginx
+  apt:
+    state: present
+    name: nginx
+    update_cache: yes
+
+- name: Copy default vhost conf
+  copy:
+    src: default
+    dest: /etc/nginx/sites-available/default
+
+- name: Symlink default in sites-enabled
+  file:
+    state: link
+    src: /etc/nginx/sites-available/default
+    dest: /etc/nginx/sites-enabled/default
+
+- name: Create html folder
+  file:
+    state: directory
+    path: /opt/default
+    owner: www-data
+    group: www-data
+
+- name: Render from template index.html
+  template:
+    src: index.html.j2
+    dest: /opt/default/index.html
+    owner: www-data
+    group: www-data
+
+- name: Restart nginx
+  service:
+    state: restarted
+    name: nginx
