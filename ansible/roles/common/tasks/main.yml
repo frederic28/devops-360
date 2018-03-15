@@ -19,17 +19,13 @@
     - ntp
     - git
 
-
-
 - name: Set timezone
   timezone:
     name: Europe/Paris
 
-- name: Create group app user
+- name: Create app user
   group:
     name: app-user
-
-- name: Create app user
   user:
     name: app-user
     append: yes
