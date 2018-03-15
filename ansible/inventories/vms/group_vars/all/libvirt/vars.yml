@@ -8,17 +8,7 @@ libvirt_vms:
     mem: 768
     ip: "{{ libvirt_ip_prefix }}.60"
 
-  01.webserver:
-    cpu: 1
-    mem: 768
-    ip: "{{ libvirt_ip_prefix }}.61"
-
   00.mysql:
     cpu: 1
     mem: 768
     ip: "{{ libvirt_ip_prefix }}.70"
-
-  01.mysql:
-    cpu: 1
-    mem: 768
-    ip: "{{ libvirt_ip_prefix }}.71"
