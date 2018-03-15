@@ -7,13 +7,18 @@
   state: present
   with_items:
     - mysql
-    - python-mysqldb
     - mysql-client
     - mysql-server
-    - MySQL-python
+
+- name: install python mysql bindings
+  apt:
+  name: python-mysqldb
+  state: installed
+  become: yes
+  become_method: sudo
 
 - name: Mot de passe root
-  MySQL-python:
+  mysql_user:
     name: root
     password: root
     priv: '*.*:ALL'
