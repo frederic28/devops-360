@@ -7,9 +7,9 @@
   state: present
   with_items:
     - mysql
+    - python-mysqldb
     - mysql-client
     - mysql-server
-    - MySQL-python
 
 - name: Mot de passe root
   mysql_user:
