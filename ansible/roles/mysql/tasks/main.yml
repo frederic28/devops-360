@@ -5,8 +5,8 @@
 
 - name: Install mysql packages
   apt:
-  name: mysql
-  state: present
+    name: mysql
+    state: present
   with_items:
     - mysql
     - mysql-client
@@ -17,16 +17,19 @@
     - libdbd-mysql
 
 - name: Install python mysql
-  apt: name=python-mysqldb state=latest
+  apt:
+    name: python-mysqldb
+    state: latest
 
 - name: Create the Drupal database
-  mysql_db: db={{ db_name }} state=present
+  mysql_db:
+    db: "{{ db_name }}"
+    state: present
 
 - name: Create the user
   mysql_user:
-  name: "{{ db_user }}"
-  password: "{{ db_password }}"
-  host: localhost
+    name: "{{ db_user }}"
+    password: "{{ db_password }}"
 
 - name: Mot de passe root
   mysql_user:
