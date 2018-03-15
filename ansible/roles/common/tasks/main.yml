@@ -6,20 +6,23 @@
     state: stopped
     name: apache2
 
+
 - name: Install common apt-packages
   apt:
-  pkg: {{common}}
+  name: {{common}}
   state: installed
-    with_items:
+  with_items:
       - htop
       - nload
       - telnet
       - netstat
       - ntp
+      - git
+
 
 
 - name: Set timezone
   timezone:
-    name: Europe/France
+    name: Europe/Paris
 
 - name: Create app user
