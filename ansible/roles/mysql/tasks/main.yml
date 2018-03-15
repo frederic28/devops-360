@@ -9,9 +9,5 @@
     - mysql
     - mysql-client
     - mysql-server
-
-- name: start mysql
-  service:
-    name: mysql
-    state: started
-    enabled: true
+  vars:
+    MySQL_root_pass: "{{ password-admin }}"
