@@ -25,6 +25,10 @@
   timezone:
     name: Europe/Paris
 
+- name: Create group app user
+  group:
+    name: app-user
+
 - name: Create app user
   user:
     name: app-user
