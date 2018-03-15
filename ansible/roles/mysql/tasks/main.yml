@@ -1,64 +1,47 @@
----
-# tasks file for mysql
-
-# cryptage ansible-vault
-
-- name: Install mysql packages
+- name: Setup Mysql database and utilities
   apt:
-  name: packet mysql
-  state: present
-  with_items:
-    - mysql
-    - mysql-client
-    - mysql-server
-    - MySQL-python
-    - python-pip
-    - python-dev
-    - libdbd-mysql
-
-- name: Install python mysql
-  apt:
-    name: python-mysqldb
-    state: latest
-
-- name: Get temporary MySQL root password
-  shell: grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}'
-  register: mysql_root_temp_password
-
-- name: Set the MySQL root password
-  shell: mysqladmin -u root --password="{{ mysql_root_temp_password.stdout }}" password="{{ db_password }}"
-  register: mysql_admin_root_password_result
-  failed_when: "'(using password: NO)' in mysql_admin_root_password_result.stderr"
-
-- name: Tune MySQL configuration
-  template:
-    src: /etc/my.cnf
-    dest: /root/my.cnf
-    mode: 0644
-  notify:
-    - restart mysql
-
-- name: Mot de passe root
-  mysql_user:
-    login_user: root
-    login_password: "{{ db_password }}"
-    name: root
     state: present
+    name: "{{ item }}"
+    update_cache: yes
+  with_items:
+    - mysql-server
+    - libdbd-mysql
+    - mysql-client
+    - python-mysqldb # Required by the Ansible
 
-- name: Create the user
+- name: Make sure Mysql binds to all interfaces
+  lineinfile:
+    path: /etc/mysql/my.cnf
+    regexp: '^bind-address'
+    line: 'bind-address = 0.0.0.0'
+    owner: root
+    group: root
+    mode: 0644
+  register: __mysql_configuration
+
+- name: Make sure Mysql is started and enabled at boot time
+  service:
+    name: mysql
+    state: "{{ (__mysql_configuration | changed) | ternary('restarted', 'started') }}"
+    enabled: yes
+    
+- name: Set a password for the MySql root user
   mysql_user:
-    name: "{{ db_user }}"
-    login_user: root
-    login_password: "{{ db_password }}"
-    password: "{{ db_password }}"
-    host: '%'
+    state: present
+    name: root
+    password: "{{ mysql_server_root_pwd }}"
 
+- name: Drop the ~/.my.cnf
+  template:
+    src: .my.cnf.j2
+    dest: /root/.my.cnf
+    owner: root
+    group: root
+    mode: '0600'
 
-
-
-    autre
-    - name: Make sure Mysql is started and enabled at boot time
-      service:
-        name: mysql
-        state: "{{ (__mysql_configuration | changed) | ternary('restarted', 'started') }}"
-        enabled: yes
+# Drop anonymous users
+- name: Drop all anonymous user accounts
+  mysql_user:
+    state: absent
+    name: ''
+    host_all: yes

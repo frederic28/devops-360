@@ -1,0 +1,54 @@
+---
+# tasks file for mysql
+
+# cryptage ansible-vault
+
+- name: Install mysql packages
+  apt:
+  name: packet mysql
+  state: present
+  with_items:
+    - mysql
+    - mysql-client
+    - mysql-server
+    - MySQL-python
+    - python-pip
+    - python-dev
+    - libdbd-mysql
+
+- name: Install python mysql
+  apt:
+    name: python-mysqldb
+    state: latest
+
+- name: Get temporary MySQL root password
+  shell: grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}'
+  register: mysql_root_temp_password
+
+- name: Set the MySQL root password
+  shell: mysqladmin -u root --password="{{ mysql_root_temp_password.stdout }}" password="{{ db_password }}"
+  register: mysql_admin_root_password_result
+  failed_when: "'(using password: NO)' in mysql_admin_root_password_result.stderr"
+
+- name: Tune MySQL configuration
+  template:
+    src: /etc/my.cnf
+    dest: /root/my.cnf
+    mode: 0644
+  notify:
+    - restart mysql
+
+- name: Mot de passe root
+  mysql_user:
+    login_user: root
+    login_password: "{{ db_password }}"
+    name: root
+    state: present
+
+- name: Create the user
+  mysql_user:
+    name: "{{ db_user }}"
+    login_user: root
+    login_password: "{{ db_password }}"
+    password: "{{ db_password }}"
+    host: '%'
