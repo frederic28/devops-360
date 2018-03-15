@@ -30,9 +30,14 @@
   register: mysql_admin_root_password_result
   failed_when: "'(using password: NO)' in mysql_admin_root_password_result.stderr"
 
+- name: Copy conf
+  copy:
+    src: my.cnf
+    dest: /etc/my.conf
+
 - name: Tune MySQL configuration
   template:
-    src: my.cnf
+    src: /etc/
     dest: /root/my.cnf
     mode: 0644
   notify:
@@ -44,6 +49,7 @@
     login_user: root
     login_password: root
     password: "{{ db_password }}"
+    host: '%'
 
 - name: Mot de passe root
   mysql_user:
