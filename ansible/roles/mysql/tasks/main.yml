@@ -41,14 +41,14 @@
 - name: Mot de passe root
   mysql_user:
     login_user: root
-    login_password: root
-    name: sql-user
+    login_password: "{{ db_password }}"
+    name: root
     state: present
 
 - name: Create the user
   mysql_user:
     name: "{{ db_user }}"
     login_user: root
-    login_password: root
+    login_password: "{{ db_password }}"
     password: "{{ db_password }}"
     host: '%'
