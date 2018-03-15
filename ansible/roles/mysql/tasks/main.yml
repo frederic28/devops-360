@@ -5,7 +5,7 @@
 
 - name: Install mysql packages
   apt:
-  name: "{{ item }}"
+  name: packet mysql
   state: present
   with_items:
     - mysql

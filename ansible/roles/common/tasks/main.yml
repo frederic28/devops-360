@@ -11,11 +11,6 @@
   name: common
   state: present
   with_items:
-    - htop
-    - nload
-    - telnet
-    - net-tools
-    - ntp
     - git
 
 - name: Set timezone
