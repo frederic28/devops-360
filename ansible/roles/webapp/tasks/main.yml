@@ -11,28 +11,28 @@
     state: stopped
     name: nginx
 
-- name: Copy default vhost conf
+- name: Copy hello-world vhost conf
   copy:
     src: default
-    dest: /etc/nginx/sites-available/default
+    dest: /etc/nginx/sites-available/hello-world
 
-- name: Symlink default in sites-enabled
+- name: Symlink hello-world in sites-enabled
   file:
     state: link
-    src: /etc/nginx/sites-available/default
-    dest: /etc/nginx/sites-enabled/default
+    src: /etc/nginx/sites-available/hello-world
+    dest: /etc/nginx/sites-enabled/hello-world
 
 - name: Create html folder
   file:
     state: directory
-    path: /opt/default
+    path: /opt/hello-world
     owner: www-data
     group: www-data
 
 - name: Render from template index.html
   template:
     src: index.html.j2
-    dest: /opt/default/index.html
+    dest: /opt/hello-world/index.html
     owner: www-data
     group: www-data
 
