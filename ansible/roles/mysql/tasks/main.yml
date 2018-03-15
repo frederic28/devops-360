@@ -15,6 +15,7 @@
     - MySQL-python
     - python-pip
     - python-dev
+    - libdbd-mysql
 
 - name: Mot de passe root
   mysql_user:
