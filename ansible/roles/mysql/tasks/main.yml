@@ -41,6 +41,8 @@
 - name: Create the user
   mysql_user:
     name: "{{ db_user }}"
+    login_user: root
+    login_password: root
     password: "{{ db_password }}"
 
 - name: Mot de passe root
