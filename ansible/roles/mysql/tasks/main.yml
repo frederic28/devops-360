@@ -10,9 +10,11 @@
     - python-mysqldb
     - mysql-client
     - mysql-server
+    - MySQL-python
 
 - name: Mot de passe root
-  mysql_user:
+  MySQL-python:
     name: root
     password: root
+    priv: '*.*:ALL'
     state: present
