@@ -21,13 +21,10 @@
     name: python-mysqldb
     state: latest
 
-- name: Tune MySQL configuration
-  template:
-    src: ./resources/my.cnf
-    dest: /etc/my.cnf
-    mode: 0644
-  notify:
-    - restart mysqld
+- name: restart mysql
+  service:
+    state: restarted
+    name: mysql
 
 - name: Create the Drupal database
   mysql_db:
