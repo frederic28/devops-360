@@ -28,5 +28,7 @@
 - name: Create app user
   user:
     name: app
+    append: yes
     comment: "user app"
+    uid: 1040
     group: app-user
