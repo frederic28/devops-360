@@ -4,9 +4,12 @@
 - name: Stop service apache
   service:
     state: stopped
-    with_items:
-      - apache2
-      - nginx
+    name: apache2
+
+- name: Stop service nginx
+  service:
+    state: stopped
+    name: nginx
 
 - name: Copy default vhost conf
   copy:
