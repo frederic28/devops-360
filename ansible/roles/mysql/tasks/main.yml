@@ -27,7 +27,7 @@
     dest: /root/my.cnf
     mode: 0644
   notify:
-    - restart mysqld
+    - restart mysql
 
 - name: Create the Drupal database
   mysql_db:
