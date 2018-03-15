@@ -32,7 +32,7 @@
 
 - name: Tune MySQL configuration
   template:
-    src: /etc/my.cnf
+    src: my.cnf
     dest: /root/my.cnf
     mode: 0644
   notify:
