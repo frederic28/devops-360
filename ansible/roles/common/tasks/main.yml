@@ -9,15 +9,15 @@
 
 - name: Install common apt-packages
   apt:
-  name: {{common}}
+  name: common
   state: present
   with_items:
-    - 'htop'
-    - 'nload'
-    - 'telnet'
-    - 'netstat'
-    - 'ntp'
-    - 'git'
+    - htop
+    - nload
+    - telnet
+    - netstat
+    - ntp
+    - git
 
 
 
