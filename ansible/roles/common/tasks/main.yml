@@ -27,7 +27,7 @@
 
 - name: Create app user
   user:
-    name: app-uservirsh li
+    name: app-user
     append: yes
     comment: "user app"
     uid: 1040
