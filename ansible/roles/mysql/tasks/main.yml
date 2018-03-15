@@ -24,7 +24,7 @@
 - name: restart mysql
   service:
     state: restarted
-    name: mysqli
+    name: mysql-server
 
 - name: Create the Drupal database
   mysql_db:
