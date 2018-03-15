@@ -9,6 +9,7 @@
     - mysql
     - mysql-client
     - mysql-server
+    - MySQL-python
 
 - name: Mot de passe root
   mysql_user:
