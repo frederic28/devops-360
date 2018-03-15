@@ -14,6 +14,15 @@
     - python-pip
     - python-dev
 
+name: Install the MySQL-python through pip
+  sudo: yes
+  pip:
+    name: mysql
+    state: forcereinstall
+  with_items:
+    - pip
+    - MySQL-python
+
 - name: Mot de passe root
   mysql_user:
     name: root
