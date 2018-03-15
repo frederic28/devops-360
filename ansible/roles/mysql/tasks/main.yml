@@ -52,3 +52,13 @@
     login_password: "{{ db_password }}"
     password: "{{ db_password }}"
     host: '%'
+
+
+
+
+    autre
+    - name: Make sure Mysql is started and enabled at boot time
+      service:
+        name: mysql
+        state: "{{ (__mysql_configuration | changed) | ternary('restarted', 'started') }}"
+        enabled: yes
