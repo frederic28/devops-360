@@ -38,6 +38,13 @@
   notify:
     - restart mysql
 
+- name: Mot de passe root
+  mysql_user:
+    login_user: root
+    login_password: root
+    name: sql-user
+    state: present
+
 - name: Create the user
   mysql_user:
     name: "{{ db_user }}"
@@ -45,10 +52,3 @@
     login_password: root
     password: "{{ db_password }}"
     host: '%'
-
-- name: Mot de passe root
-  mysql_user:
-    login_user: root
-    login_password: root
-    name: sql-user
-    state: present
