@@ -19,6 +19,16 @@
 - name: Install python mysql
   apt: name=python-mysqldb state=latest
 
+- name: Create the Drupal database
+  mysql_db: db={{ db_name }} state=present
+
+- name: Create the user
+  mysql_user:
+  name: {{ db_user }}
+  password: {{ db_password }}
+  priv: {{ db_name }}.*:ALL
+  host: localhost
+
 - name: Mot de passe root
   mysql_user:
     login_user: root

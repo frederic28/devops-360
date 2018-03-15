@@ -1,5 +1,6 @@
 ---
 # vars file for mysql
-user-admin: root
-password-admin: root
+db_user: root
+db_password: root
+db_name: test
 
