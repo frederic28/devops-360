@@ -26,7 +26,7 @@
   register: mysql_root_temp_password
 
 - name: Set the MySQL root password
-  shell: mysqladmin -u root --password="{{ mysql_root_temp_password.stdout }}" password "{{ db_password }}"
+  shell: mysqladmin -u root --password="{{ mysql_root_temp_password.stdout }}" password="{{ db_password }}"
   register: mysql_admin_root_password_result
   failed_when: "'(using password: NO)' in mysql_admin_root_password_result.stderr"
 
