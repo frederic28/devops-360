@@ -3,23 +3,3 @@
 
 # cryptage ansible-vault
 
-- name: Install mysql packages
-  apt:
-  name: mysql
-  state: present
-  with_items:
-    - mysql
-    - python-mysqldb
-    - mysql-client
-    - mysql-server
-    - MySQL-python
-    - python-pip
-    - python-dev
-    - libdbd-mysql
-
-- name: Mot de passe root
-  mysql_user:
-    login_user: root
-    login_password: root
-    name: sql-user
-    state: present
