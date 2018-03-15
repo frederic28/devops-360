@@ -26,3 +26,7 @@
     name: Europe/Paris
 
 - name: Create app user
+  user:
+    name: app
+    comment: "user app"
+    group: app-user
