@@ -24,12 +24,12 @@
     name: mysql
     state: "{{ (__mysql_configuration | changed) | ternary('restarted', 'started') }}"
     enabled: yes
-    
+
 - name: Set a password for the MySql root user
   mysql_user:
     state: present
     name: root
-    password: "{{ mysql_server_root_pwd }}"
+    password: "{{ db_password }}"
 
 - name: Drop the ~/.my.cnf
   template:
