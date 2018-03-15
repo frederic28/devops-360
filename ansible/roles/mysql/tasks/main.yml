@@ -12,6 +12,6 @@
 
 - name: Mot de passe root
   mysql_user:
-    name: "{{ user-admin }}"
-    password: "{{ password-admin }}"
+    name: root
+    password: root
     state: present
