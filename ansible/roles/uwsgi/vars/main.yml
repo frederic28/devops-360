@@ -2,7 +2,7 @@
 # vars file for uwsgi
 - name: Install Uwsgi dependencies
   apt:
-    name: dependencies
+    name: "{{ item }}"
   with_items:
     - python-dev
     - python-apt
@@ -12,7 +12,7 @@
 - name: Install virtualenv and uwsgi using pip
   pip:
     state: present
-    name: virtualenv uwsgi
+    name: "{{ item }}"
   with_items:
     - virtualenv
     - uwsgi
@@ -21,7 +21,7 @@
 - name: Create the Uwsgi folders
   file:
     state: directory
-    path: route
+    path: "{{ item }}"
     owner: root
     group: root
     mode: '0755'
