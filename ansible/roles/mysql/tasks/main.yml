@@ -15,15 +15,3 @@
     name: mysql
     state: started
     enabled: true
-
-- name: Install Mysql for prod
-  host: 
-
-- name: Create mysql user
-  mysql_user:
-    login_user: {{ user-admin }}
-    login_password: {{ password-admin }}
-    name: mysql-user
-
-    host: localhost
-    state: present
